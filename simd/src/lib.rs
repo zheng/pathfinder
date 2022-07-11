@@ -10,6 +10,7 @@
 
 #![cfg_attr(pf_rustc_nightly, feature(link_llvm_intrinsics, platform_intrinsics))]
 #![cfg_attr(pf_rustc_nightly, feature(simd_ffi, stdsimd))]
+#![feature(portable_simd)]
 
 //! A minimal SIMD abstraction, usable outside of Pathfinder.
 

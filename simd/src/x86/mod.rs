@@ -12,7 +12,7 @@ use std::cmp::PartialEq;
 use std::fmt::{self, Debug, Formatter};
 use std::mem;
 use std::ops::{Add, BitAnd, BitOr, BitXor, Div, Index, IndexMut, Mul, Not, Shr, Sub};
-use serde::{Serialize, Deserialize};
+use serde::{Serialize, Deserialize, Serializer};
 
 #[cfg(target_pointer_width = "32")]
 use std::arch::x86::{__m128, __m128i};
@@ -218,8 +218,22 @@ impl Sub<F32x2> for F32x2 {
 
 // Four 32-bit floats
 
+#[derive(Serialize, Deserialize)]
+struct FourTuple(f32, f32, f32, f32);
+
 #[derive(Clone, Copy)]
 pub struct F32x4(pub __m128);
+
+impl Serialize for F32x4 {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        let value: core::simd::f32x4 = self.0.into();
+        let values = value.as_array();
+        FourTuple(values[0], value[1], value[2], value[3]).serialize(serializer)
+    }
+}
 
 impl F32x4 {
     // Constructors
