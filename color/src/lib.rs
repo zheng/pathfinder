@@ -12,11 +12,12 @@ use pathfinder_simd::default::F32x4;
 use std::f32::consts::PI;
 use std::fmt::{self, Debug, Formatter};
 use std::slice;
+use serde::{Serialize, Deserialize};
 
 pub mod matrix;
 
 // TODO(pcwalton): Maybe this should be a u32? Need to be aware of endianness issues if we do that.
-#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Serialize, Deserialize)]
 #[repr(C)]
 pub struct ColorU {
     pub r: u8,

@@ -2452,6 +2452,7 @@ name = "pathfinder_color"
 version = "0.5.0"
 dependencies = [
  "pathfinder_simd",
+ "serde",
 ]
 
 [[package]]
