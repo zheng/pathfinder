@@ -2515,6 +2515,7 @@ version = "0.5.1"
 dependencies = [
  "log",
  "pathfinder_simd",
+ "serde",
 ]
 
 [[package]]
@@ -2642,6 +2643,7 @@ name = "pathfinder_simd"
 version = "0.5.1"
 dependencies = [
  "rustc_version 0.3.3",
+ "serde",
 ]
 
 [[package]]

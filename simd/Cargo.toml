@@ -13,6 +13,7 @@ homepage = "https://github.com/servo/pathfinder"
 pf-no-simd = []
 
 [dependencies]
+serde = {version = "1.0", features = ["derive"]}
 
 [build-dependencies]
 rustc_version = "0.3"

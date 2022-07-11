@@ -13,9 +13,10 @@
 use pathfinder_simd::default::{F32x2, F32x4, I32x2};
 use std::hash::{Hash, Hasher};
 use std::ops::{Add, AddAssign, Div, Mul, MulAssign, Neg, Sub, SubAssign};
+use serde::{Serialize, Deserialize};
 
 /// 2D points with 32-bit floating point coordinates.
-#[derive(Clone, Copy, Debug, Default)]
+#[derive(Clone, Copy, Debug, Default, Serialize, Deserialize)]
 pub struct Vector2F(pub F32x2);
 
 impl Vector2F {

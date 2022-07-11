@@ -12,6 +12,7 @@ use std::cmp::PartialEq;
 use std::fmt::{self, Debug, Formatter};
 use std::mem;
 use std::ops::{Add, BitAnd, BitOr, BitXor, Div, Index, IndexMut, Mul, Not, Shr, Sub};
+use serde::{Serialize, Deserialize};
 
 #[cfg(target_pointer_width = "32")]
 use std::arch::x86::{__m128, __m128i};
@@ -27,7 +28,7 @@ mod swizzle_i32x4;
 
 // Two 32-bit floats
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Serialize, Deserialize)]
 pub struct F32x2(pub u64);
 
 impl F32x2 {

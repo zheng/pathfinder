@@ -13,8 +13,9 @@
 use crate::vector::{IntoVector2F, Vector2F, Vector2I};
 use pathfinder_simd::default::{F32x4, I32x4};
 use std::ops::{Add, AddAssign, Mul, MulAssign, Sub, SubAssign};
+use serde::{Serialize, Deserialize};
 
-#[derive(Clone, Copy, Debug, PartialEq, Default)]
+#[derive(Clone, Copy, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct RectF(pub F32x4);
 
 impl RectF {
