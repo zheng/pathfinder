@@ -12,7 +12,7 @@ use std::cmp::PartialEq;
 use std::fmt::{self, Debug, Formatter};
 use std::mem;
 use std::ops::{Add, BitAnd, BitOr, BitXor, Div, Index, IndexMut, Mul, Not, Shr, Sub};
-use serde::{Serialize, Deserialize, Serializer};
+use serde::{Serialize, Deserialize, Serializer, Deserializer};
 
 #[cfg(target_pointer_width = "32")]
 use std::arch::x86::{__m128, __m128i};
@@ -232,6 +232,19 @@ impl Serialize for F32x4 {
         let value: core::simd::f32x4 = self.0.into();
         let values = value.as_array();
         FourTuple(values[0], value[1], value[2], value[3]).serialize(serializer)
+    }
+}
+
+impl<'de> Deserialize<'de> for F32x4 {
+    fn deserialize<D>(deserializer: D) -> Result<F32x4, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        #[cfg(not(target_arch = "x86_64"))]
+        unimplemented("Should not get here");
+        #[cfg(target_arch = "x86_64")]
+        FourTuple::deserialize(deserializer)
+            .map(|tuple| F32x4::new(tuple.0, tuple.1, tuple.2, tuple.3))
     }
 }
 
